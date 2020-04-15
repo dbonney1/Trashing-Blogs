@@ -1,5 +1,52 @@
-<h1>Listing articles</h1>
-<%= link_to'New article', new_article_path%>
+<head>
+    <title>Trashing Blogs</title>
+</head>
+<body>
+    <main class="main_index">
+        <header>
+            <h1 id="welcome">Listing articles</h1>
+            <ul id="navPane">
+                <li><%= link_to'Home', root_path, :style=>'font-family: impact; color: black'%></li>
+                <li><%= link_to'Feed', articles_path, :style=>'font-family: impact; color: black'%></li>
+                <li><%= link_to'Article List', articles_path, :style=>'font-family: impact; color: black'%></li>
+                <li><%= link_to'Profile', articles_path, :style=>'font-family: impact; color: black'%></li>
+                <li><%= link_to'Settings', articles_path, :style=>'font-family: impact; color: black'%></li>
+            </ul>
+        </header>
+        <div id="new article">
+            <%= link_to'New article', new_article_path%>
+        </div>
+        <div id="articles list">
+            <table>
+              <tr>
+                <th>Title</th>
+                <th>Text</th>
+                <th>Author</th>
+                <th>Tag</th>
+              </tr>
+             
+              <% @articles.each do |article| %>
+                <tr>
+                  <td><%= article.title %></td>
+                  <td><%= article.text %></td>
+                  <td>
+                    <% if article.user %>
+                      <%= article.user.name %>
+                    <% end %>
+                  </td>
+                  <td><%= article.tag %></td>
+                  <td><%= link_to 'Show', article_path(article) %></td>
+                  <td><%= link_to 'Edit', edit_article_path(article) %></td>
+                  <td><%= link_to'Destroy', article_path(article), method: :delete, data: { confirm: 'Are you sure?' } %></td>
+                </tr>
+              <% end %>
+            </table>
+        </div>
+    </main>
+</body>
+
+<!--<h1>Listing articles</h1>-->
+<!--<%= link_to'New article', new_article_path%>-->
  
 <table>
   <tr>
