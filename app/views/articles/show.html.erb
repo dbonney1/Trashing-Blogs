@@ -15,3 +15,5 @@
 <%= render 'comments/form' %>
 
 <%= link_to'Article List', articles_path%>
+<%= link_to'Report this Article', new_article_abuse_report_path(:article_id, :abuse_reports) %>
+<%= link_to'Abuse Reports', article_abuse_reports_path(:article_id, :abuse_reports) %>

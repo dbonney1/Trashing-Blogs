@@ -1,0 +1,21 @@
+<h1>List of reports</h1>
+<% if @abuse_reports %>
+    <table>
+      <tr>
+        <th>Reason</th>
+        <th>Info</th>
+      </tr>
+     
+      <% @abuse_reports.each do |abuse_report| %>
+        <tr>
+          <td><%= abuse_report.reason %></td>
+          <td><%= abuse_report.body %></td>
+          <td><%= link_to 'Show', article_abuse_report_path(:article_id, :abuse_report) %></td>
+        </tr>
+      <% end %>
+    </table>
+<% else %>
+    <p>
+        No reports currently
+    </p>
+<% end %>
