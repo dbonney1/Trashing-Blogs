@@ -7,6 +7,7 @@ Rails.application.routes.draw do
   
   resources :articles do
     resources :comments
+    resources :abuse_reports
   end
   
   resources :sessions, only: [:new, :create, :destroy]
