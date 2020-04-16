@@ -1,21 +1,40 @@
-<h1>List of reports</h1>
-<% if @abuse_reports %>
-    <table>
-      <tr>
-        <th>Reason</th>
-        <th>Info</th>
-      </tr>
-     
-      <% @abuse_reports.each do |abuse_report| %>
-        <tr>
-          <td><%= abuse_report.reason %></td>
-          <td><%= abuse_report.body %></td>
-          <td><%= link_to 'Show', article_abuse_report_path(:article_id, :abuse_report) %></td>
-        </tr>
-      <% end %>
-    </table>
-<% else %>
-    <p>
-        No reports currently
-    </p>
-<% end %>
+<head>
+    <title>Trashing Blogs</title>
+</head>
+<body>
+    <main class="main_index">
+        <header>
+          <h1 id="welcome">Trashing Blogs</h1>
+          <ul id="navPane">
+            <li><%= link_to'Home', root_path, :style=>'font-family: impact; color: black'%></li>
+            <li><%= link_to'Feed', articles_path, :style=>'font-family: impact; color: black'%></li>
+            <li><%= link_to'Article List', articles_path, :style=>'font-family: impact; color: black'%></li>
+            <li><%= link_to'Profile', articles_path, :style=>'font-family: impact; color: black'%></li>
+            <li><%= link_to'Settings', articles_path, :style=>'font-family: impact; color: black'%></li>
+          </ul>
+        </header>
+        <div>
+            <h1>List of reports</h1>
+            <% if @abuse_reports %>
+              <table>
+                <tr>
+                  <th>Reason</th>
+                  <th>Info</th>
+                </tr>
+       
+                <% @abuse_reports.each do |abuse_report| %>
+                  <tr>
+                    <td><%= abuse_report.reason %></td>
+                    <td><%= abuse_report.body %></td>
+                    <td><%= link_to 'Show', article_abuse_report_path(abuse_report, :id) %></td>
+                  </tr>
+                <% end %>
+              </table>
+            <% else %>
+              <p>
+                No reports currently
+              </p>
+            <% end %>
+        </div>
+    </main>
+</body>
