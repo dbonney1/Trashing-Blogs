@@ -5,6 +5,25 @@
     margin-top: 30px;
     text-align: center;
 }
+.report-element, {
+    font-family: "Franklin Gothic Medium";
+    font-size: medium;
+}
+.report-heading {
+    font-family: "Franklin Gothic Medium";
+    font-size: 20pt;
+}
+.report-article-info {
+    background-color: #F0E68C;
+    border: 2px solid red;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    margin: auto;
+    width: 50%;
+}
 .report-element {
-    margin-bottom: 40px;
+    margin-top: 40px;
+}
+#report-options {
+    margin-top: 60px;
 }

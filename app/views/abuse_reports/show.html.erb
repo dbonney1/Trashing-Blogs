@@ -14,16 +14,32 @@
           </ul>
         </header>
             <div id="report-info">
-                <h1 class="report-element">Report Info:</h1>
-                <p class="report-element">
-                    <strong>Reason</strong>
-                    <%= @abuse_report.reason %>
-                </p>
-                <p class="report-element">
-                    <strong>Additional Info</strong>
-                    <%= @abuse_report.body %>
-                </p>
-                <h1>What action would you like to take?</h1>
+                <h1>Report Info:</h1>
+                <div class="report-article-info">
+                    <h1 class="report-heading">Article Title:</h1>
+                    <%= @abuse_report.article.title %>
+                    <h1 class="report-heading">Contents:</h1>
+                    <%= @abuse_report.article.text %>
+                    <h1 class="report-heading">Author:</h1>
+                    <% if @abuse_report.article.user %>
+                      <%= @abuse_report.article.user.name %>
+                    <% end %>
+                    <div id="report-content">
+                        <p class="report-element">
+                            <strong>Reason</strong>
+                            <%= @abuse_report.reason %>
+                        </p>
+                        <p class="report-element">
+                            <strong>Additional Info</strong>
+                            <%= @abuse_report.body %>
+                        </p>
+                    </div>
+                </div>
+                <div id="report-options">
+                    <h1>What action would you like to take?</h1>
+                    <%= link_to 'Destroy Report', [@abuse_report.article, @abuse_report], method: :delete, data: { confirm: 'Are you sure?' } %>
+                    <%= link_to 'Inspect Article', article_path(@abuse_report.article) %>
+                </div>
             </div>
     </main>
 </body>
