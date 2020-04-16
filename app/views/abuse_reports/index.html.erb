@@ -26,7 +26,7 @@
                   <tr>
                     <td><%= abuse_report.reason %></td>
                     <td><%= abuse_report.body %></td>
-                    <td><%= link_to 'Show', article_abuse_report_path(abuse_report, :id) %></td>
+                    <td><%= link_to 'Show', article_abuse_report_path(abuse_report, abuse_report.id) %></td>
                   </tr>
                 <% end %>
               </table>
