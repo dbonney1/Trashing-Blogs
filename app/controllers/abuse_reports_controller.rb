@@ -1,6 +1,6 @@
 class AbuseReportsController < ApplicationController
     def create
-        @article = Article.find(params[:abuse_report][:article_id])
+        @article = Article.find(params[:article_id])
         @abuse_report = @article.abuse_reports.create(abuse_report_params)
         redirect_to article_path(@article)
     end
@@ -12,6 +12,7 @@ class AbuseReportsController < ApplicationController
     end
     def new
         @article = Article.find(params[:article_id])
+        @abuse_report = @article.abuse_reports.new()
     end
     private
         def abuse_report_params
