@@ -9,8 +9,13 @@
 </p>
 
 <p>
-    <strong>Tag</strong>
-    <%= @article.tag %>
+    <strong>Tags</strong>
+    <%= @article.tag_list %>
+    <ul>
+      <% @related_articles.each do |f| %>
+    <li><%= link_to f.title, article_path(f)%></li>
+      <% end %>
+    </ul>
 </p>
 
 <h2>Comments</h2>
