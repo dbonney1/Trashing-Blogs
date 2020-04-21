@@ -46,9 +46,9 @@ class ArticlesController < ApplicationController
     
     def tagged
         if params[:tag].present?
-            @article = Article.tagged_with(params[:tag])
+            @articles = Article.tagged_with(params[:tag])
         else
-            @posts = Article.all
+            @articles = Article.all
         end
     end
 end
