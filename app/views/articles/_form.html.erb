@@ -25,8 +25,7 @@
   </p>
   
   <p>
-    <%= f.label :tag %><br>
-    <%= f.text_field :tag %>
+    <%= f.text_field :tag_list, value: @article.send(:tag_list).to_s%>
   </p>
  
   <p>

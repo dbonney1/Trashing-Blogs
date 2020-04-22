@@ -5,6 +5,7 @@ class ArticlesController < ApplicationController
     
     def show
         @article = Article.find(params[:id])
+        @related_articles = @article.find_related_tags
     end
 
     def new
@@ -42,9 +43,19 @@ class ArticlesController < ApplicationController
         
         redirect_to articles_path
     end
+    
+    def tagged
+        if params[:tag].present?
+            @articles = Article.tagged_with(params[:tag])
+        else
+            @articles = Article.all
+        end
+    end
 end
+
+    
 
 private
     def article_params
-        params.require(:article).permit(:title, :text)
+        params.require(:article).permit(:title, :text, :tag_list)
     end
