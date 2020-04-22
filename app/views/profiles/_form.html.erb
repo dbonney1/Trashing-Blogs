@@ -1,0 +1,22 @@
+<%= form_for @profile, url: user_profile_path(@user.id) do |f| %>
+ 
+  <p>
+    <%= f.label :bio %><br>
+    <%= f.text_field :bio %>
+  </p>
+ 
+  <p>
+    <%= f.label :description %><br>
+    <%= f.text_area :description %>
+  </p>
+  
+  <p>
+      <%= f.label :imageurl %><br>
+      <%= f.text_field :imageurl %>
+  </p>
+ 
+  <p>
+    <%= f.submit %>
+  </p>
+ 
+<% end %>

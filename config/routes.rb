@@ -3,7 +3,7 @@ Rails.application.routes.draw do
   get 'sessions/create'
   get 'sessions/destroy'
   resources :users do
-    resources :profile
+    resources :profiles
   end
   get 'welcome/index'
   
