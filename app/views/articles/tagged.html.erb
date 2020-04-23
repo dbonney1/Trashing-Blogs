@@ -4,17 +4,15 @@
 <body>
     <main class="main_index">
         <header>
-            <h1 id="welcome">Listing articles</h1>
+            <h1 id="welcome">Similar Articles</h1>
             <ul id="navPane">
                 <li><%= link_to'Home', root_path, :style=>'font-family: impact; color: black'%></li>
                 <li><%= link_to'Feed', articles_path, :style=>'font-family: impact; color: black'%></li>
                 <li><%= link_to'Article List', articles_path, :style=>'font-family: impact; color: black'%></li>
+                <li><%= link_to'Profile', articles_path, :style=>'font-family: impact; color: black'%></li>
                 <li><%= link_to'Settings', articles_path, :style=>'font-family: impact; color: black'%></li>
             </ul>
         </header>
-        <div id="new article">
-            <%= link_to'New article', new_article_path%>
-        </div>
         <div id="articles list">
             <table>
               <tr>
@@ -45,4 +43,3 @@
         </div>
     </main>
 </body>
-

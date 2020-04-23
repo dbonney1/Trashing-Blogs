@@ -2,7 +2,9 @@ Rails.application.routes.draw do
   get 'sessions/new'
   get 'sessions/create'
   get 'sessions/destroy'
-  resources :users
+  resources :users do
+    resources :profiles
+  end
   get 'welcome/index'
   
   resources :articles do
