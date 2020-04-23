@@ -29,6 +29,9 @@ gem 'bcrypt', '~> 3.1.7'
 
 gem 'acts-as-taggable-on', '~> 6.0'
 
+# Use Font-Awesome for custom fonts
+gem 'font-awesome-sass', '~> 5.12.0'
+
 # Use ActiveStorage variant
 # gem 'mini_magick', '~> 4.8'
 
