@@ -1,21 +1,36 @@
 <p id="notice"><%= notice %></p>
-<% if @user.profile.present? %>
-  <p>
-    <strong>Name:</strong>
-    <%= @user.name %>
-  </p>
-  
-  <p>
-    <strong>Email:</strong>
-    <%= @user.email %>
-  </p>
-  
-  <%= link_to 'Edit my User Info', edit_user_path(@user) %> |
-  <%= link_to 'Edit my Profile Info', edit_user_profile_path(@user.id, @user.profile) %> |
-  <%= link_to 'Back', users_path %>
-<% else %>
-  <p>
-    <strong>Let's set up your profile!</strong>
-    <%= link_to 'Create my Profile!', new_user_profile_path(@user) %>
-  </p>
-<% end %>
+<main>
+  <h1 id="welcome">Change User Settings</h1>
+  <header>
+    <ul id="navPane">
+      <li><%= link_to'Home', root_path, :style=>'font-family: impact; color: black'%></li>
+      <li><%= link_to'Feed', articles_path, :style=>'font-family: impact; color: black'%></li>
+      <li><%= link_to'Article List', articles_path, :style=>'font-family: impact; color: black'%></li>
+      <% if current_user.present? %>
+        <li><%= link_to'Settings', user_path(current_user), :style=>'font-family: impact; color: black'%></li>
+      <% end %>
+    </ul>
+  </header>
+            
+  <% if @user.profile.present? %>
+    <p>
+      <strong>Name:</strong>
+      <%= @user.name %>
+    </p>
+    
+    <p>
+      <strong>Email:</strong>
+      <%= @user.email %>
+    </p>
+    
+    <%= link_to 'Edit my User Info', edit_user_path(@user) %> |
+    <%= link_to 'Edit my Profile Info', edit_user_profile_path(@user.id, @user.profile) %> |
+    <%= link_to 'Back', users_path %>
+  <% else %>
+    <p>
+      <strong>Let's set up your profile!</strong>
+      <%= link_to 'Create my Profile!', new_user_profile_path(@user) %>
+    </p>
+  <% end %>
+</main>
+
