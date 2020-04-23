@@ -9,7 +9,17 @@
     <strong>Email:</strong>
     <%= @user.email %>
   </p>
-  
+<div>
+    <p>
+        <strong>User Bio</strong>
+        <%= @user.profile.bio %>
+    </p>
+    <p>
+        <strong>User Description:</strong>
+        <%= @user.profile.description %>
+    </p>
+    <img src=<%= @user.profile.imageurl %> alt="profile pic">
+</div>
   <%= link_to 'Edit my User Info', edit_user_path(@user) %> |
   <%= link_to 'Edit my Profile Info', edit_user_profile_path(@user.id, @user.profile) %> |
   <%= link_to 'Back', users_path %>
