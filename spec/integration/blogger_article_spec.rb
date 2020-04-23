@@ -13,24 +13,31 @@ feature"Blogger article related tests" do
         click_button "Create User"
         
         expect(page).to have_content("User was successfully created.")
-        expect(page).to have_content("Name: Anon123")
-        expect(page).to have_content("Email: test@gmail.com")
-        click_link "Back"
-        click_link "Back"
+        expect(page).to have_content("Let's set up your profile! Create my Profile!")
+        expect(page).to have_content("New Profile")
+        fill_in "Bio", with: "Reeee"
+        fill_in "Description", with: "testing123123"
+        fill_in "Imageurl", with: "https://i.imgur.com/bhC7g1p.jpg"
+        expect(page).to have_content("User Profile")
+        expect(page).to have_content("User Bio reeee")
+        expect(page).to have_content("User Description: testing123123")
+        # expect(page).to have_content("Name: Anon123")
+        # expect(page).to have_content("Email: test@gmail.com")
+        # click_link "Back"
+        # click_link "Back"
         
-        click_link "Log In"
-        expect(page).to have_content("Login")
-        fill_in "Email", with: "test@gmail.com"
-        fill_in "Password", with: "test123"
-        click_button "Login"
-        expect(page).to have_content("logged in as Anon123")
+        # click_link "Log In"
+        # expect(page).to have_content("Login")
+        # fill_in "Email", with: "test@gmail.com"
+        # fill_in "Password", with: "test123"
+        # click_button "Login"
+        # expect(page).to have_content("logged in as Anon123")
     end
     
     def create_article(title, text, tag)
         expect(page).to have_content("New Article")
         fill_in "Title", with: title
         fill_in "Text", with: text
-        fill_in "Tag", with: tag
         click_button "Create Article"
         expect(page).to have_content(title)
         expect(page).to have_content(text)
