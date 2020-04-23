@@ -4,13 +4,30 @@
 <body>
     <main class="main_index">
         <header>
-            <h1 id="welcome">Welcome to TrashingBlogs</h1>
+                <h1 id="welcome">Welcome to TrashingBlogs</h1>
+                <% if current_user.present? && current_user.profile.present? %>
+                    <%= link_to user_profile_path(current_user, current_user.profile) do %>
+                        <%= image_tag current_user.profile.imageurl, :class => "profile-picture-logo" %>
+                    <% end %>
+                <% end %>
+                
+                    <% if current_user %>
+                        <span class="logout-info">
+                            logged in as <%= current_user.name %>
+                            <%= link_to "Log Out", logout_path %>
+                        </span>
+                    <% else %>
+                        <span class="login-info">
+                            <%= link_to "Sign Up", signup_path %> or
+                            <%= link_to "Log In", login_path %>
+                        </span>
+                    <% end %>
             <ul id="navPane">
-                <li><%= link_to'Home', root_path, :style=>'font-family: impact; color: black'%></li>
-                <li><%= link_to'Feed', articles_path, :style=>'font-family: impact; color: black'%></li>
-                <li><%= link_to'Article List', articles_path, :style=>'font-family: impact; color: black'%></li>
+                <li><%= link_to'Home', root_path, :style=>'font-family: "Times New Roman"; color: white'%></li>
+                <li><%= link_to'Feed', articles_path, :style=>'font-family: "Times New Roman"; color: white'%></li>
+                <li><%= link_to'Article List', articles_path, :style=>'font-family: "Times New Roman"; color: white'%></li>
                 <% if current_user.present? %>
-                    <li><%= link_to'Settings', user_path(current_user), :style=>'font-family: impact; color: black'%></li>
+                    <li><%= link_to'Settings', user_path(current_user), :style=>'font-family: "Times New Roman"; color: white'%></li>
                 <% end %>
             </ul>
         </header>
@@ -19,17 +36,14 @@
             <div id="home-main-right">
             </div>
         </div>
+        
         <div id="welcome-msg">
-                <h1>Hello, Blog App User!<br></h1>
-                <p>
-                    <% if current_user %>
-                        logged in as <%= current_user.name %>
-                        <%= link_to "Log Out", logout_path %>
-                    <% else %>
-                        <%= link_to "Sign Up", signup_path %> or
-                        <%= link_to "Log In", login_path %>
-                    <% end %>
-                </p>
+            <% if current_user.present? %>
+                <h1>Hello, <%= current_user.name %><br></h1>
+            <% else %>
+                <h1>Welcome to TrashingBlogs!</h1>
+                <h1>Make an account to access cool features!</h1>
+            <% end %>
         </div>
     </main>
 </body>

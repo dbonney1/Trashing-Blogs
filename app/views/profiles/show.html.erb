@@ -11,3 +11,10 @@
     </p>
     <img class="profile-picture" src=<%= @profile.imageurl %> alt="profile pic">
 </div>
+
+<% if current_user.present? %>
+    <%= link_to 'Back', user_path(current_user) %>
+<% else %>
+    <%= link_to 'Back', root_path %>
+<% end %>
+

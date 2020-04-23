@@ -35,12 +35,13 @@
     <img class="profile-picture" src=<%= @user.profile.imageurl %> alt="profile pic">
 </div>
 
-    <%= link_to 'Edit my User Info', edit_user_path(@user) %> |
-    <%= link_to 'Edit my Profile Info', edit_user_profile_path(@user.id, @user.profile) %> |
-    <%= link_to 'Back', users_path %>
-  <% else %>
-    <p>
-      <strong>Let's set up your profile!</strong>
-      <%= link_to 'Create my Profile!', new_user_profile_path(@user) %>
-    </p>
-  <% end %>
+  <%= link_to 'Edit my User Info', edit_user_path(@user) %> |
+  <%= link_to 'Edit my Profile Info', edit_user_profile_path(@user.id, @user.profile) %> |
+  <%= link_to 'Back', users_path %>
+<% else %>
+  <p>
+    <strong>Let's set up your profile!</strong>
+    <%= link_to 'Create my Profile!', new_user_profile_path(@user) %>
+  </p>
+<% end %>
+</main>

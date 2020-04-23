@@ -9,8 +9,9 @@
                 <li><%= link_to'Home', root_path, :style=>'font-family: impact; color: black'%></li>
                 <li><%= link_to'Feed', articles_path, :style=>'font-family: impact; color: black'%></li>
                 <li><%= link_to'Article List', articles_path, :style=>'font-family: impact; color: black'%></li>
-                <li><%= link_to'Profile', articles_path, :style=>'font-family: impact; color: black'%></li>
-                <li><%= link_to'Settings', articles_path, :style=>'font-family: impact; color: black'%></li>
+                <% if current_user.present? %>
+                    <li><%= link_to'Settings', user_path(current_user), :style=>'font-family: impact; color: black'%></li>
+                <% end %>
             </ul>
         </header>
         <div id="articles list">

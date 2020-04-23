@@ -1,27 +1,40 @@
 // Place all the styles related to the Welcome controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
-
+.login-info {
+    float: right;
+    display: inline-block;
+}
+.logout-info {
+    float:right;
+    position: relative;
+    top: 80px;
+    left: -20px;
+}
 #welcome {
+    display: inline-block;
     font-size: 32px;
     font-family: impact;
 }
-h1 {
+#welcome-msg {
     font-family: impact;
+    display: inline-block;
 }
 body {
     background: #cdffcd;
 }
 #navPane {
      /* Remove Bullets */
+     clear: right;
     list-style-type: none;
     margin: 0;
     padding: 0;
-    background: linear-gradient(#8BEA4C, yellow);
+    background: linear-gradient(darkslategrey, green);
+    font-family: "Times New Roman";
     /* display as flexbox so that navigation pane scales with the window size */
     display: flex;
     flex-direction: row;
-    width: 100%;;
+    width: 100%;
 }
 main {
     margin-left: 20px;
@@ -55,9 +68,6 @@ main {
     height: 350px;
     float: right;
     border: 1px solid black;
-}
-#welcome-msg {
-    display: inline-block;
 }
 
 /**
