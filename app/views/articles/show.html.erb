@@ -11,7 +11,11 @@
                     <h1 id="welcome">Welcome to TrashingBlogs</h1>
                     <% if current_user.present? && current_user.profile.present? %>
                         <%= link_to user_profile_path(current_user, current_user.profile) do %>
-                            <%= image_tag current_user.profile.imageurl, :class => "profile-picture-logo" %>
+                            <% if current_user.profile.avatar.attached? %>
+                                <%= image_tag current_user.profile.avatar, :class => "profile-picture-logo" %>
+                            <% else %>
+                                <%= image_tag("https://www.eyedocs.co.uk/components/com_community/assets/user-anon.png", :class => "profile-picture-logo") %>
+                            <% end %>
                         <% end %>
                     <% end %>
                     <% if current_user %>
@@ -40,7 +44,11 @@
                             <div class="article-poster">
                                 <% if @article.user %>
                                     <%= link_to user_profile_path(@article.user, @article.user.profile) do %>
-                                        <%= image_tag @article.user.profile.imageurl, :class => "profile-picture-embed" %>
+                                        <% if @article.user.profile.avatar.attached? %>
+                                            <%= image_tag current_user.profile.avatar, :class => "profile-picture-embed" %>
+                                        <% else %>
+                                            <%= image_tag("https://www.eyedocs.co.uk/components/com_community/assets/user-anon.png", :class => "profile-picture-embed") %>
+                                        <% end %>
                                     <% end %>
                                     <div>
                                         Written by <%= @article.user.name %>

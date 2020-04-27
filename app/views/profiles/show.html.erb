@@ -9,7 +9,11 @@
         <strong>User Description:</strong>
         <%= @profile.description %>
     </p>
-    <img class="profile-picture" src=<%= @profile.imageurl %> alt="profile pic">
+    <% if @profile.avatar.attached? %>
+        <img class="profile-picture" src=<%=(url_for(@profile.avatar)) %> alt="profile pic">
+    <% else %>
+        <img class="profile-picture" src="https://www.eyedocs.co.uk/components/com_community/assets/user-anon.png" alt="profile pic">
+    <% end %>
 </div>
 
 <% if current_user.present? %>

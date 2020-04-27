@@ -22,6 +22,8 @@ class ProfilesController < ApplicationController
     def edit 
         @user = User.find(params[:user_id])
         @profile = Profile.find(params[:id])
+        @profile.avatar.purge
+        @profile.avatar.attach(params[:avatar])
     end
     def update
         @user = User.find(params[:user_id])
@@ -39,6 +41,6 @@ class ProfilesController < ApplicationController
     end
     private 
         def profile_params
-            params.require(:profile).permit(:bio, :description, :imageurl)
+            params.require(:profile).permit(:bio, :description, :avatar)
         end
 end
