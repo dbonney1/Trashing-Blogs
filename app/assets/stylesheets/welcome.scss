@@ -3,6 +3,8 @@
 // You can use Sass (SCSS) here: http://sass-lang.com/
 .login-info {
     float: right;
+    position: relative;
+    left: -20px;
     display: inline-block;
 }
 .logout-info {
@@ -13,6 +15,8 @@
 }
 #welcome {
     display: inline-block;
+    position: relative;
+    left: 20px;
     font-size: 32px;
     font-family: impact;
 }
@@ -21,7 +25,12 @@
     display: inline-block;
 }
 body {
+    margin: 0;
+    padding: 0;
     background: #cdffcd;
+}
+header {
+    margin-top: 20px;
 }
 #navPane {
      /* Remove Bullets */
@@ -29,15 +38,24 @@ body {
     list-style-type: none;
     margin: 0;
     padding: 0;
-    background: linear-gradient(darkslategrey, green);
+    background: linear-gradient(darkslategrey, grey);
     font-family: "Times New Roman";
     /* display as flexbox so that navigation pane scales with the window size */
     display: flex;
     flex-direction: row;
     width: 100%;
 }
-main {
-    margin-left: 20px;
+
+.body-container {
+    display: flex;
+    flex-direction: row;
+}
+.body-main {
+    flex: 0 1 90%;
+}
+.column {
+    flex: 0 1 5%;
+    background-color: white;
 }
 #navPane li {
     border-right: 2px solid black;
@@ -52,7 +70,7 @@ main {
 #home-main {
     display: flex;
     flex-direction: row;
-    margin: 20px 20px 20px 0px;
+    margin: 20px 0px 20px 0px;
     padding: 0;
 }
 
@@ -69,7 +87,14 @@ main {
     float: right;
     border: 1px solid black;
 }
-
+#home-main-right > h1 {
+    font-family: Calibri;
+    text-align: center;
+}
+.profile-container {
+    display: inline-block;
+    margin-left: 20px;
+}
 /**
 * List of Articles
 */

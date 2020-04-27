@@ -3,7 +3,11 @@
 </head>
 <body>
     <main class="main_index">
-        <header>
+        
+        <div class="body-container">
+            <div class="column"></div>
+            <div class="body-main">
+                <header>
                 <h1 id="welcome">Welcome to TrashingBlogs</h1>
                 <% if current_user.present? && current_user.profile.present? %>
                     <%= link_to user_profile_path(current_user, current_user.profile) do %>
@@ -31,19 +35,48 @@
                 <% end %>
             </ul>
         </header>
-        <div id="home-main">
-            <img id="home-main-left"src="https://cdn.discordapp.com/attachments/671777843776323584/697862767507537920/15d.jpg" alt="welcome" height="100" width="100">
-            <div id="home-main-right">
+            <div id="home-main">
+                <img id="home-main-left"src="https://cdn.discordapp.com/attachments/671777843776323584/697862767507537920/15d.jpg" alt="welcome" height="100" width="100">
+                <div id="home-main-right">
+                    <h1>Check out these blog users!</h1>
+                    <div class="profile-container">
+                        <h2><%= User.find(7).name %></h2>
+                        <%= link_to user_profile_path(User.find(7), User.find(7).profile) do %>
+                            <%= image_tag User.find(7).profile.imageurl, :class => "profile-picture-embed" %>
+                        <% end %>
+                    </div>
+                    <div class="profile-container">
+                        <h2><%= User.find(22).name %></h2>
+                        <%= link_to user_profile_path(User.find(22), User.find(22).profile) do %>
+                            <%= image_tag User.find(22).profile.imageurl, :class => "profile-picture-embed" %>
+                        <% end %>
+                    </div>
+                    <div class="profile-container">
+                        <h2><%= User.find(22).name %></h2>
+                        <%= link_to user_profile_path(User.find(22), User.find(22).profile) do %>
+                            <%= image_tag User.find(22).profile.imageurl, :class => "profile-picture-embed" %>
+                        <% end %>
+                    </div>
+                    <div class="profile-container">
+                        <h2><%= User.find(26).name %></h2>
+                        <%= link_to user_profile_path(User.find(26), User.find(26).profile) do %>
+                            <%= image_tag User.find(26).profile.imageurl, :class => "profile-picture-embed" %>
+                        <% end %>
+                    </div>
+                </div>
             </div>
-        </div>
+            
+            <div id="welcome-msg">
+                <% if current_user.present? %>
+                    <h1>Hello, <%= current_user.name %><br></h1>
+                <% else %>
+                    <h1>Welcome to TrashingBlogs!</h1>
+                    <h1>Make an account to access cool features!</h1>
+                <% end %>
+            </div>
+            </div>
+            <div class="column"></div>
+            </div>
         
-        <div id="welcome-msg">
-            <% if current_user.present? %>
-                <h1>Hello, <%= current_user.name %><br></h1>
-            <% else %>
-                <h1>Welcome to TrashingBlogs!</h1>
-                <h1>Make an account to access cool features!</h1>
-            <% end %>
-        </div>
     </main>
 </body>
