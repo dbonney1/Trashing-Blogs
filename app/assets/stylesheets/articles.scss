@@ -28,10 +28,9 @@ input[type=button], input[type=submit] {
     cursor: pointer;
 }
 .article-container {
-    border: 3px solid black;
     margin-bottom: 30px;
-    margin-top: 10px;
-    margin-bottom: 10px;
+    margin-top: 30px;
+    margin-bottom: 50px;
     padding-bottom: 50px;
 }
 .article-post {
@@ -58,7 +57,7 @@ input[type=button], input[type=submit] {
     left: 20px;
 }
 .article-comments-section {
-    width: 80%;
+    width: 84%;
     margin: auto;
 }
 .article-comments {
@@ -76,11 +75,12 @@ input[type=button], input[type=submit] {
     float: bottom;
 }
 .article-button {
+    position: relative;
+    left: -150px;
     border: 2px solid black;
     border-radius: 10px;
     width: 30%;
-    margin: auto;
-    margin-right: 10px;
+    margin-right: 50px;
     display: inline-block;
     background-color: red;
 }

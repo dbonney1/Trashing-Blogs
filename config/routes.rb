@@ -3,19 +3,20 @@ Rails.application.routes.draw do
   get 'sessions/create'
   get 'sessions/destroy'
   resources :users do
+    member do
+      get :subscribed_to, :subscribers
+    end
     resources :profiles
-    resources :subscriptions
   end
   get 'welcome/index'
+  
+  resources :subscriptions, only: [:create, :destroy]
   
   resources :articles do
     resources :comments
     resources :abuse_reports
   end
   
-  resources :subscriptions do
-    resources :users
-  end
   
   resources :sessions, only: [:new, :create, :destroy]
   get 'signup', to: 'users#new', as: 'signup'

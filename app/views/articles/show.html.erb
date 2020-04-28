@@ -45,7 +45,7 @@
                                 <% if @article.user %>
                                     <%= link_to user_profile_path(@article.user, @article.user.profile) do %>
                                         <% if @article.user.profile.avatar.attached? %>
-                                            <%= image_tag current_user.profile.avatar, :class => "profile-picture-embed" %>
+                                            <%= image_tag @article.user.profile.avatar, :class => "profile-picture-embed" %>
                                         <% else %>
                                             <%= image_tag("https://www.eyedocs.co.uk/components/com_community/assets/user-anon.png", :class => "profile-picture-embed") %>
                                         <% end %>
@@ -71,9 +71,8 @@
                             </p>
                         </div>
                         <div class="article-button-container">
-                                <%= button_to 'Article List', articles_path, :method => 'get', class: 'article-button', :style => 'background: linear-gradient(darkslategray, green)'%>
+                                <%= render '/subscriptions_helpers/subscribe_button', :user => @article.user %>
                                 <%= button_to 'Report Abuse', new_article_abuse_report_path(@article), :method => 'get', class: 'article-button', :style => 'background: linear-gradient(darkred, red)' %>
-                                <%= button_to 'Abuse Reports', article_abuse_reports_path(@article.id), :method => 'get', class: 'article-button', :style => 'background: linear-gradient(darkslategray, green)' %>
                         </div>
                     </div>
                 </div>

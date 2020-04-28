@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_04_27_204018) do
+ActiveRecord::Schema.define(version: 2020_04_28_162210) do
 
   create_table "abuse_reports", force: :cascade do |t|
     t.string "reason"
@@ -72,10 +72,13 @@ ActiveRecord::Schema.define(version: 2020_04_27_204018) do
   end
 
   create_table "subscriptions", force: :cascade do |t|
-    t.integer "user_id"
+    t.integer "subscriber_id"
+    t.integer "subscribed_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["user_id"], name: "index_subscriptions_on_user_id"
+    t.index ["subscribed_id"], name: "index_subscriptions_on_subscribed_id"
+    t.index ["subscriber_id", "subscribed_id"], name: "index_subscriptions_on_subscriber_id_and_subscribed_id", unique: true
+    t.index ["subscriber_id"], name: "index_subscriptions_on_subscriber_id"
   end
 
   create_table "taggings", force: :cascade do |t|

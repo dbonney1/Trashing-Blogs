@@ -1,3 +1,6 @@
 class Subscription < ApplicationRecord
-  has_and_belongs_to_many :user
+    belongs_to :subscriber, class_name: "User"
+    belongs_to :subscribed, class_name: "User"
+    validates :subscriber_id, presence: true
+    validates :subscribed_id, presence: true
 end

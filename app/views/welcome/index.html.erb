@@ -42,30 +42,9 @@
                 <img id="home-main-left"src="https://cdn.discordapp.com/attachments/671777843776323584/697862767507537920/15d.jpg" alt="welcome" height="100" width="100">
                 <div id="home-main-right">
                     <h1>Check out these blog users!</h1>
-                    <div class="profile-container">
-                        <h2><%= User.find(7).name %></h2>
-                        <%= link_to user_profile_path(User.find(7), User.find(7).profile) do %>
-                            <%= image_tag User.find(7).profile.imageurl, :class => "profile-picture-embed" %>
-                        <% end %>
-                    </div>
-                    <div class="profile-container">
-                        <h2><%= User.find(22).name %></h2>
-                        <%= link_to user_profile_path(User.find(22), User.find(22).profile) do %>
-                            <%= image_tag User.find(22).profile.imageurl, :class => "profile-picture-embed" %>
-                        <% end %>
-                    </div>
-                    <div class="profile-container">
-                        <h2><%= User.find(22).name %></h2>
-                        <%= link_to user_profile_path(User.find(22), User.find(22).profile) do %>
-                            <%= image_tag User.find(22).profile.imageurl, :class => "profile-picture-embed" %>
-                        <% end %>
-                    </div>
-                    <div class="profile-container">
-                        <h2><%= User.find(26).name %></h2>
-                        <%= link_to user_profile_path(User.find(26), User.find(26).profile) do %>
-                            <%= image_tag User.find(26).profile.imageurl, :class => "profile-picture-embed" %>
-                        <% end %>
-                    </div>
+                    <% if current_user.present? %>
+                        <h2>You are currently subscribed to <%= current_user.subscribed_to.count %> people.</h2>
+                    <% end %>
                 </div>
             </div>
             

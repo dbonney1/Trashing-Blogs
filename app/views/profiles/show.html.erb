@@ -14,6 +14,7 @@
     <% else %>
         <img class="profile-picture" src="https://www.eyedocs.co.uk/components/com_community/assets/user-anon.png" alt="profile pic">
     <% end %>
+        <%= render '/subscriptions_helpers/subscribe_button', :user => @profile.user %>
 </div>
 
 <% if current_user.present? %>
