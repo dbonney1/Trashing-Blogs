@@ -73,7 +73,16 @@
                         <div class="article-button-container">
                                 <%= render '/subscriptions_helpers/subscribe_button', :user => @article.user %>
                                 <%= button_to 'Report Abuse', new_article_abuse_report_path(@article), :method => 'get', class: 'article-button', :style => 'background: linear-gradient(darkred, red)' %>
+                                <% @like = @article.likes.find_by_user_id(current_user.id) %>
+                                <% if @like %>
+                                    <%= button_to 'Unlike!', article_like_path(@article, @like.id), :method => 'delete', class: 'article-button', :style => 'background: linear-gradient(darkred, red)' %>
+                                <% else %>
+                                    <i class="fas fa-thumbs-up"></i>
+                                    <%= button_to 'Like!', article_likes_path(@article), :method => 'post', class: 'article-button', :style => 'background: linear-gradient(darkred, red)' %>
+                                <% end %>
+                                
                         </div>
+                        <span>This post has received <%= @article.likes.count %> Likes!</span>
                     </div>
                 </div>
                 <div class="article-comments-section">

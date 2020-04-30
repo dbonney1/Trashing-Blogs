@@ -7,6 +7,8 @@ class User < ApplicationRecord
     has_many :subscribed_to, through: :active_subscriptions, source: :subscribed 
     has_many :subscribers, through: :passive_subscriptions, source: :subscriber
     
+    has_many :likes, dependent: :destroy
+    
     # subscribe helper methods
     # subscribe to a user
     def subscribe(other_user)
