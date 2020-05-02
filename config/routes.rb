@@ -10,7 +10,7 @@ Rails.application.routes.draw do
   end
   get 'welcome/index'
   
-  resources :subscriptions, only: [:create, :destroy]
+  resources :subscriptions, only: [:create, :destroy, :show, :index]
   
   resources :articles do
     resources :comments

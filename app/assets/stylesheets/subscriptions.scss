@@ -8,3 +8,42 @@
     margin-right: 10px;
     display: inline-block;
 }
+.feed-subscriptions {
+    height: 50vh;
+    min-width: 300px;
+    overflow-y: auto;
+    overflow-x: hidden;
+    margin-right: 50px;
+    border: 2px solid black;
+    border-radius: 5px;
+    padding: 20px;
+    background-color: white;
+    text-align: center;
+}
+.feed-subscriptions > h2 {
+    font-family: "Calibri";
+    color: black;
+    font-weight: bolder;
+    padding: 10px;
+    border: 1px solid black;
+    border-radius: 5px;
+    background: linear-gradient(yellow, red);
+}
+.feed-subscriptions-user {
+    display: inline-block;
+    margin-right: 20px;
+}
+
+.feed-post-section {
+    display: inline-block;
+    margin-left: 50px;
+    margin-right: 50px;
+    min-width: 400px;
+}
+.feed-post-section::after {
+    display: block;
+    padding-top: 56.25%;
+}
+.body-main-feed {
+    display: flex;
+}

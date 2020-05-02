@@ -2,11 +2,12 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 .profile-picture {
-    width: 200px;
-    height: 200px;
+    width: 150px;
+    height: 150px;
 }
 .profile-picture-logo {
     display: inline-block;
+    position: relative;
     float: right;
     width: 100px;
     height: 100px;
@@ -17,4 +18,102 @@
     display: inline-block;
     width: 100px;
     height: 100px;
+}
+.profile-area-container {
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    top: 20px;
+    width: 80%;
+    min-width: 500px;
+    padding: 20px;
+    margin: auto;
+    background-color: white;
+    border: 3px solid black;
+    border-radius: 20px;
+}
+#profile-top-container {
+    flex: 0 1 30%;
+}
+#profile-left-container {
+    display: inline-block;
+}
+#profile-left-container p {
+    position: relative;
+    left: 50px;
+}
+#profile-right-container {
+    position: relative;
+    left: 20px;
+    top: -30px;
+    width: 40vw;
+    display: inline-block;
+}
+#bio-details {
+    flex: 0 1 20%;
+    padding: 20px;
+    display: inline-block;
+}
+#bio-details p {
+    font-size: 12pt;
+}
+#description-details {
+    flex: 0 1 20%;
+    padding: 20px;
+    display: inline-block;
+}
+#description-details p {
+    font-size: 12pt;
+}
+#profile-articles-area {
+    height: 300px;
+    width: 40%;
+    display: inline-block;
+    overflow-y: auto;
+    overflow-x: auto;
+    padding: 20px;
+    margin: auto;
+    border: 2px solid black;
+    background: linear-gradient(#1E90FF, #00BFFF);
+    box-shadow: 0 1px 6px rgba(0, 0, 0, 0.12), 0 1px 4px rgba(0, 0, 0, 0.24);
+}
+#profile-subscriber-area {
+    float: right;
+    height: 300px;
+    width: 40%;
+    display: inline-block;
+    overflow-y: auto;
+    overflow-x: auto;
+    padding: 20px;
+    margin: auto;
+    border: 2px solid black;
+    background: linear-gradient(#1E90FF, #00BFFF);
+    box-shadow: 0 1px 6px rgba(0, 0, 0, 0.12), 0 1px 4px rgba(0, 0, 0, 0.24);
+}
+#profile-subscriber-area p, #profile-articles-area p {
+    font-size: 14pt;
+}
+
+.profile-subscriber {
+    display: inline-block;
+    margin: 10px;
+}
+.profile-subscriber span {
+    display: block;
+    text-align: center;
+}
+#profile-bottom-container {
+    flex: 0 1 40%;
+}
+.profile-article-preview-title {
+    width: 50%;
+    margin: auto;
+    text-align: center;
+    font-size: 13pt;
+    margin-bottom: 60px;
+}
+.profile-article-options-button {
+    width: 100%;
+    margin: auto;
+   
 }

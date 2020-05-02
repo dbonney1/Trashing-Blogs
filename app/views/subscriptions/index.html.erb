@@ -1,3 +1,4 @@
+
 <head>
     <title>Trashing Blogs</title>
 </head>
@@ -37,14 +38,29 @@
                         <% end %>
                     </ul>
                 </header>
-                <div class="article-preview-body-container">
-                    <div class="article-preview-container">
-                        <div class="articles-list">
+                    <div class="article-preview-container-feed">
+                        <div class="feed-subscriptions">
+                            <h2>Your Subscriptions:</h2>
+                            <% current_user.subscribed_to.each do |subscription| %>
+                                <div class="feed-subscriptions-user">
+                                    <p><%= subscription.name %></p>
+                                    <%= link_to user_profile_path(subscription, subscription.profile) do %>
+                                        <% if subscription.profile.avatar.attached? %>
+                                            <%= image_tag subscription.profile.avatar, :class => "profile-picture-logo" %>
+                                        <% else %>
+                                            <%= image_tag("https://www.eyedocs.co.uk/components/com_community/assets/user-anon.png", :class => "profile-picture-logo") %>
+                                        <% end %>
+                                    <% end %>
+                                </div>
+                            <% end %>
+                        </div>
+                        <div class="feed-post-section">
                             <div class="article-list-post-new">
                                 <h2>Create a new article!</h2>
                                 <%= button_to 'Create an Article', new_article_path, :method => 'get', :class => 'article-new-button', :style => 'border: 1px solid black; background: linear-gradient(#1E90FF, #00BFFF); color: white; font-weight: bolder' %>
                             </div>
-                            <% @articles.each do |article| %>
+                            <% current_user.subscribed_to.each do |subscription| %>
+                              <% subscription.articles.each do |article| %>
                               <div class="article-list-post">
                                   <div class="article-preview-author-container">
                                       <% if article.user %>
@@ -63,22 +79,21 @@
                                   <div class="article-preview-text"><%= article.text[0..20] %>...</div>
                                   <div class="article-preview-options">
                                       <%= button_to 'Show More', article_path(article), :method => 'get', :class => 'article-options-button', :style => 'color: blue; height: 30px; padding: 0px; border: 1px solid black; background: linear-gradient(#86E845, #6CBC6D); color: white; font-weight: bolder' %>
-                                      <% if article.user == current_user %>
-                                          <%= button_to 'Edit', new_article_path, :method => 'get', :class => 'article-options-button', :style => 'height: 30px; padding: 0px; border: 1px solid black; background: linear-gradient(#1E90FF, #00BFFF); color: white; font-weight: bolder' %>
-                                          <%= button_to 'Destroy', article_path(article), :method => 'delete', data: { confirm: 'Are you sure?' }, :class => 'article-options-button', :style => 'height: 30px; padding: 0px; border: 1px solid black; background: linear-gradient(#B7140F, #DA4F4F); color: white; font-weight: bolder' %>
-                                      <% end %>
                                   </div>
-                                  <div class="article-preview-tags">Tags:<% article.tag_list.each do |tag| %>
+                                  <div class="article-preview-tags"><% article.tag_list.each do |tag| %>
                                       <%= link_to tag, tagged_path(tag: tag) %>
                                   <% end %>
+                                  
                                   </div>
                               </div>
+                              <% end %>
+                            
                             <% end %>
                         </div>
+                        
                     </div>
                 </div>
             </div>
-        </div>
     </main>
 </body>
 

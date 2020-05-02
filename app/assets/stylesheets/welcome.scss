@@ -10,7 +10,7 @@
 .logout-info {
     float:right;
     position: relative;
-    top: 80px;
+    top: 0px;
     left: -20px;
 }
 #welcome {
@@ -51,12 +51,9 @@ header {
     flex-direction: row;
 }
 .body-main {
-    flex: 0 1 90%;
+    flex: 0 1 100%;
 }
-.column {
-    flex: 0 1 5%;
-    background-color: white;
-}
+
 #navPane li {
     border-right: 2px solid black;
     flex: 0 1 25%;

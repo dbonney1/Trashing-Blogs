@@ -5,7 +5,6 @@
     <main class="main_index">
         
         <div class="body-container">
-            <div class="column"></div>
             <div class="body-main">
                 <header>
                     <h1 id="welcome">Welcome to TrashingBlogs</h1>
@@ -31,34 +30,30 @@
                     <% end %>
                     <ul id="navPane">
                         <li><%= link_to'Home', root_path, :style=>'font-family: "Times New Roman"; color: white'%></li>
-                        <li><%= link_to'Feed', articles_path, :style=>'font-family: "Times New Roman"; color: white'%></li>
+                        <li><%= link_to'Feed', subscriptions_path, :style=>'font-family: "Times New Roman"; color: white'%></li>
                         <li><%= link_to'Article List', articles_path, :style=>'font-family: "Times New Roman"; color: white'%></li>
                         <% if current_user.present? %>
                             <li><%= link_to'Settings', user_path(current_user), :style=>'font-family: "Times New Roman"; color: white'%></li>
                         <% end %>
                     </ul>
                 </header>
-            <div id="home-main">
-                <img id="home-main-left"src="https://cdn.discordapp.com/attachments/671777843776323584/697862767507537920/15d.jpg" alt="welcome" height="100" width="100">
-                <div id="home-main-right">
-                    <h1>Check out these blog users!</h1>
+                <div id="home-main">
+                    <img id="home-main-left"src="https://cdn.discordapp.com/attachments/671777843776323584/697862767507537920/15d.jpg" alt="welcome" height="100" width="100">
+                    <div id="home-main-right">
+                        <h1>Check out these blog users!</h1>
+                        <% if current_user.present? %>
+                            <h2>You are currently subscribed to <%= current_user.subscribed_to.count %> people.</h2>
+                        <% end %>
+                    </div>
+                </div>
+                <div id="welcome-msg">
                     <% if current_user.present? %>
-                        <h2>You are currently subscribed to <%= current_user.subscribed_to.count %> people.</h2>
+                        <h1>Hello, <%= current_user.name %><br></h1>
+                    <% else %>
+                        <h1>Welcome to TrashingBlogs!</h1>
+                        <h1>Make an account to access cool features!</h1>
                     <% end %>
                 </div>
-            </div>
-            
-            <div id="welcome-msg">
-                <% if current_user.present? %>
-                    <h1>Hello, <%= current_user.name %><br></h1>
-                <% else %>
-                    <h1>Welcome to TrashingBlogs!</h1>
-                    <h1>Make an account to access cool features!</h1>
-                <% end %>
-            </div>
-            </div>
-            <div class="column"></div>
-            </div>
-        
+        </div>
     </main>
 </body>
