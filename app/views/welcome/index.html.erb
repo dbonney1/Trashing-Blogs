@@ -18,10 +18,18 @@
                         <% end %>
                     <% end %>
                     <% if current_user %>
-                        <span class="logout-info">
-                            logged in as <%= current_user.name %>
-                            <%= link_to "Log Out", logout_path %>
-                        </span>
+                        <div class="logout-info">
+                            <span id="logout">
+                                logged in as <%= current_user.name %>
+                                <%= link_to "Log Out", logout_path %>
+                            </span>
+                            <% if current_user.admin? %>
+                                <span id="admin-abuse-reports">
+                                    <i class="fas fa-inbox"></i>
+                                    <%= link_to "Check Abuse Reports", article_abuse_reports_path(Article.all) %>
+                                </span>
+                            <% end %>
+                        </div>
                     <% else %>
                         <span class="login-info">
                             <%= link_to "Sign Up", signup_path %> or
@@ -33,12 +41,28 @@
                         <li><%= link_to'Feed', subscriptions_path, :style=>'font-family: "Times New Roman"; color: white'%></li>
                         <li><%= link_to'Article List', articles_path, :style=>'font-family: "Times New Roman"; color: white'%></li>
                         <% if current_user.present? %>
-                            <li><%= link_to'Settings', user_path(current_user), :style=>'font-family: "Times New Roman"; color: white'%></li>
+                            <li><%= link_to'Profile', user_profile_path(current_user, current_user.profile), :style=>'font-family: "Times New Roman"; color: white'%></li>
                         <% end %>
                     </ul>
                 </header>
                 <div id="home-main">
-                    <img id="home-main-left"src="https://cdn.discordapp.com/attachments/671777843776323584/697862767507537920/15d.jpg" alt="welcome" height="100" width="100">
+                    <div id="home-main-left">
+                        <% if current_user.present? %>
+                            <% if current_user.profile.present? %>
+                                <%= link_to user_profile_path(current_user, current_user.profile) do %>
+                                    <% if current_user.profile.avatar.attached? %>
+                                        <%= image_tag current_user.profile.avatar, :class => "profile-picture-large" %>
+                                    <% else %>
+                                        <%= image_tag("https://www.eyedocs.co.uk/components/com_community/assets/user-anon.png", :class => "profile-picture-logo") %>
+                                    <% end %>
+                                <% end %>
+                            <% end %>
+                            <h1>Hello, <%= current_user.name %><br></h1>
+                        <% else %>
+                            <h1>Welcome to TrashingBlogs!</h1>
+                            <h1>Make an account to access cool features!</h1>
+                        <% end %>
+                    </div>
                     <div id="home-main-right">
                         <% if !current_user.present? %>
                             <h1>Make an account to see other users!</h1>
@@ -64,12 +88,7 @@
                     </div>
                 </div>
                 <div id="welcome-msg">
-                    <% if current_user.present? %>
-                        <h1>Hello, <%= current_user.name %><br></h1>
-                    <% else %>
-                        <h1>Welcome to TrashingBlogs!</h1>
-                        <h1>Make an account to access cool features!</h1>
-                    <% end %>
+                    
                 </div>
         </div>
     </main>

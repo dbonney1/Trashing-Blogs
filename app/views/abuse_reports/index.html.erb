@@ -3,38 +3,69 @@
 </head>
 <body>
     <main class="main_index">
-        <header>
-          <h1 id="welcome">Trashing Blogs</h1>
-          <ul id="navPane">
-            <li><%= link_to'Home', root_path, :style=>'font-family: impact; color: black'%></li>
-            <li><%= link_to'Feed', articles_path, :style=>'font-family: impact; color: black'%></li>
-            <li><%= link_to'Article List', articles_path, :style=>'font-family: impact; color: black'%></li>
-            <li><%= link_to'Profile', articles_path, :style=>'font-family: impact; color: black'%></li>
-            <li><%= link_to'Settings', articles_path, :style=>'font-family: impact; color: black'%></li>
-          </ul>
-        </header>
-        <div>
-            <h1>List of reports</h1>
-            <% if @abuse_reports %>
-              <table>
-                <tr>
-                  <th>Reason</th>
-                  <th>Info</th>
-                </tr>
-       
-                <% @abuse_reports.each do |abuse_report| %>
-                  <tr>
-                    <td><%= abuse_report.reason %></td>
-                    <td><%= abuse_report.body %></td>
-                    <td><%= link_to 'Show', article_abuse_report_path(abuse_report, abuse_report.id) %></td>
-                  </tr>
-                <% end %>
-              </table>
-            <% else %>
-              <p>
-                No reports currently
-              </p>
-            <% end %>
-        </div>
+        
+        <div class="body-container">
+            <div class="body-main">
+                <header>
+                    <h1 id="welcome">Welcome to TrashingBlogs</h1>
+                    <% if current_user.present? && current_user.profile.present? %>
+                        <%= link_to user_profile_path(current_user, current_user.profile) do %>
+                            <% if current_user.profile.avatar.attached? %>
+                                <%= image_tag current_user.profile.avatar, :class => "profile-picture-logo" %>
+                            <% else %>
+                                <%= image_tag("https://www.eyedocs.co.uk/components/com_community/assets/user-anon.png", :class => "profile-picture-logo") %>
+                            <% end %>
+                        <% end %>
+                    <% end %>
+                    <% if current_user %>
+                        <div class="logout-info">
+                            <span id="logout">
+                                logged in as <%= current_user.name %>
+                                <%= link_to "Log Out", logout_path %>
+                            </span>
+                            <% if current_user.admin? %>
+                                <span id="admin-abuse-reports"><i class="fas fa-inbox"></i>Check Abuse Reports</span>
+                            <% end %>
+                        </div>
+                    <% else %>
+                        <span class="login-info">
+                            <%= link_to "Sign Up", signup_path %> or
+                            <%= link_to "Log In", login_path %>
+                        </span>
+                    <% end %>
+                    <ul id="navPane">
+                        <li><%= link_to'Home', root_path, :style=>'font-family: "Times New Roman"; color: white'%></li>
+                        <li><%= link_to'Feed', subscriptions_path, :style=>'font-family: "Times New Roman"; color: white'%></li>
+                        <li><%= link_to'Article List', articles_path, :style=>'font-family: "Times New Roman"; color: white'%></li>
+                        <% if current_user.present? %>
+                            <li><%= link_to'Profile', user_profile_path(current_user, current_user.profile), :style=>'font-family: "Times New Roman"; color: white'%></li>
+                        <% end %>
+                    </ul>
+                </header>
+                <div id="report-index-body">
+                    <h1>List of reports</h1>
+                    <% if @abuse_reports %>
+                      <table>
+                        <tr>
+                          <th>Reason</th>
+                          <th>Info</th>
+                        </tr>
+               
+                        <% @abuse_reports.each do |abuse_report| %>
+                          <tr>
+                            <td><%= abuse_report.reason %></td>
+                            <td><%= abuse_report.body %></td>
+                            <td><%= link_to 'Show', article_abuse_report_path(abuse_report, abuse_report.id) %></td>
+                          </tr>
+                        <% end %>
+                      </table>
+                    <% else %>
+                      <p>
+                        No reports currently
+                      </p>
+                    <% end %>
+                </div>
+              </div>
+            </div>
     </main>
 </body>

@@ -18,10 +18,15 @@
                         <% end %>
                     <% end %>
                     <% if current_user %>
-                        <span class="logout-info">
-                            logged in as <%= current_user.name %>
-                            <%= link_to "Log Out", logout_path %>
-                        </span>
+                        <div class="logout-info">
+                            <span id="logout">
+                                logged in as <%= current_user.name %>
+                                <%= link_to "Log Out", logout_path %>
+                            </span>
+                            <% if current_user.admin? %>
+                                <span id="admin-abuse-reports"><i class="fas fa-inbox"></i>Check Abuse Reports</span>
+                            <% end %>
+                        </div>
                     <% else %>
                         <span class="login-info">
                             <%= link_to "Sign Up", signup_path %> or
@@ -33,7 +38,7 @@
                         <li><%= link_to'Feed', subscriptions_path, :style=>'font-family: "Times New Roman"; color: white'%></li>
                         <li><%= link_to'Article List', articles_path, :style=>'font-family: "Times New Roman"; color: white'%></li>
                         <% if current_user.present? %>
-                            <li><%= link_to'Settings', user_path(current_user), :style=>'font-family: "Times New Roman"; color: white'%></li>
+                            <li><%= link_to'Profile', user_profile_path(current_user, current_user.profile), :style=>'font-family: "Times New Roman"; color: white'%></li>
                         <% end %>
                     </ul>
                 </header>
@@ -57,6 +62,14 @@
                                 <p><strong>User Description:</strong></p>
                                     <p><%= @profile.description %></p>
                             </div>
+                            <% if @profile.user == current_user %>
+                                <div id="profile-edit-details">
+                                    <i class="fas fa-pen"></i>
+                                    <%= link_to 'Edit my User Info', edit_user_path(@profile.user) %> |
+                                    <i class="fas fa-pen"></i>
+                                    <%= link_to 'Edit my Profile Info', edit_user_profile_path(@profile.user.id, @profile.user.profile) %> |
+                                </div>
+                            <% end %>
                         </div>
                     </div>
                     <div id="profile-bottom-container">

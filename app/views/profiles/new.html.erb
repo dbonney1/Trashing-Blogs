@@ -15,23 +15,23 @@
                             <% end %>
                         <% end %>
                         <% if current_user %>
-                            <span class="logout-info">
-                                logged in as <%= current_user.name %>
-                                <%= link_to "Log Out", logout_path %>
-                            </span>
+                            <div class="logout-info">
+                                <span id="logout">
+                                    logged in as <%= current_user.name %>
+                                    <%= link_to "Log Out", logout_path %>
+                                </span>
+                                <% if current_user.admin? %>
+                                    <span id="admin-abuse-reports"><i class="fas fa-inbox"></i>Check Abuse Reports</span>
+                                <% end %>
+                            </div>
                         <% else %>
-                            <span class="login-info">
-                                <%= link_to "Sign Up", signup_path %> or
-                                <%= link_to "Log In", login_path %>
-                            </span>
-                        <% end %>
                         <ul id="navPane">
                             <li><%= link_to'Home', root_path, :style=>'font-family: "Times New Roman"; color: white'%></li>
                             <li><%= link_to'Feed', articles_path, :style=>'font-family: "Times New Roman"; color: white'%></li>
                             <li><%= link_to'Article List', articles_path, :style=>'font-family: "Times New Roman"; color: white'%></li>
                             <% if current_user.present? %>
-                                <li><%= link_to'Settings', user_path(current_user), :style=>'font-family: "Times New Roman"; color: white'%></li>
-                            <% end %>
+                            <li><%= link_to'Profile', user_profile_path(current_user, current_user.profile), :style=>'font-family: "Times New Roman"; color: white'%></li>
+                        <% end %>
                         </ul>
                     </header>
                     <div>

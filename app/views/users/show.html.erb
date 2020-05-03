@@ -1,51 +1,86 @@
-<p id="notice"><%= notice %></p>
-<main>
-  <h1 id="welcome">Change User Settings</h1>
-  <header>
-    <ul id="navPane">
-      <li><%= link_to'Home', root_path, :style=>'font-family: impact; color: black'%></li>
-      <li><%= link_to'Feed', articles_path, :style=>'font-family: impact; color: black'%></li>
-      <li><%= link_to'Article List', articles_path, :style=>'font-family: impact; color: black'%></li>
-      <% if current_user.present? %>
-        <li><%= link_to'Settings', user_path(current_user), :style=>'font-family: impact; color: black'%></li>
-      <% end %>
-    </ul>
-  </header>
-            
-  <% if @user.profile.present? %>
-    <p>
-      <strong>Name:</strong>
-      <%= @user.name %>
-    </p>
-    
-    <p>
-      <strong>Email:</strong>
-      <%= @user.email %>
-    </p>
-    
-<div>
-    <p>
-        <strong>User Bio</strong>
-        <%= @user.profile.bio %>
-    </p>
-    <p>
-        <strong>User Description:</strong>
-        <%= @user.profile.description %>
-    </p>
-    <% if @user.profile.avatar.attached? %>
-      <img class="profile-picture" src=<%= (url_for(@user.profile.avatar)) %> alt="profile pic">
-    <% else %>
-      <img class="profile-picture" src="https://www.eyedocs.co.uk/components/com_community/assets/user-anon.png" alt="profile pic">
-    <% end %>
-</div>
-  <i class="fas fa-pen"></i>
-  <%= link_to 'Edit my User Info', edit_user_path(@user) %> |
-  <%= link_to 'Edit my Profile Info', edit_user_profile_path(@user.id, @user.profile) %> |
-  <%= link_to 'Back', root_path %>
-<% else %>
-  <p>
-    <strong>Let's set up your profile!</strong>
-    <%= link_to 'Create my Profile!', new_user_profile_path(@user) %>
-  </p>
-<% end %>
-</main>
+<head>
+    <title>Trashing Blogs</title>
+</head>
+<body>
+    <main class="main_index">
+        
+        <div class="body-container">
+            <div class="body-main">
+                <header>
+                    <h1 id="welcome">Welcome to TrashingBlogs</h1>
+                    <% if current_user.present? && current_user.profile.present? %>
+                        <%= link_to user_profile_path(current_user, current_user.profile) do %>
+                            <% if current_user.profile.avatar.attached? %>
+                                <%= image_tag current_user.profile.avatar, :class => "profile-picture-logo" %>
+                            <% else %>
+                                <%= image_tag("https://www.eyedocs.co.uk/components/com_community/assets/user-anon.png", :class => "profile-picture-logo") %>
+                            <% end %>
+                        <% end %>
+                    <% end %>
+                    <% if current_user %>
+                        <div class="logout-info">
+                            <span id="logout">
+                                logged in as <%= current_user.name %>
+                                <%= link_to "Log Out", logout_path %>
+                            </span>
+                            <% if current_user.admin? %>
+                                <span id="admin-abuse-reports">
+                                    <i class="fas fa-inbox"></i>
+                                    <%= link_to "Check Abuse Reports", article_abuse_reports_path(Article.all) %>
+                                </span>
+                            <% end %>
+                        </div>
+                    <% else %>
+                        <span class="login-info">
+                            <%= link_to "Sign Up", signup_path %> or
+                            <%= link_to "Log In", login_path %>
+                        </span>
+                    <% end %>
+                    <ul id="navPane">
+                        <li><%= link_to'Home', root_path, :style=>'font-family: "Times New Roman"; color: white'%></li>
+                        <li><%= link_to'Feed', subscriptions_path, :style=>'font-family: "Times New Roman"; color: white'%></li>
+                        <li><%= link_to'Article List', articles_path, :style=>'font-family: "Times New Roman"; color: white'%></li>
+                        <% if current_user.present? %>
+                            <li><%= link_to'Profile', user_profile_path(current_user, current_user.profile), :style=>'font-family: "Times New Roman"; color: white'%></li>
+                        <% end %>
+                    </ul>
+                </header>
+                <% if @user.profile.present? %>
+                  <p>
+                    <strong>Name:</strong>
+                    <%= @user.name %>
+                  </p>
+                  
+                  <p>
+                    <strong>Email:</strong>
+                    <%= @user.email %>
+                  </p>
+                  <div>
+                      <p>
+                          <strong>User Bio</strong>
+                          <%= @user.profile.bio %>
+                      </p>
+                      <p>
+                          <strong>User Description:</strong>
+                          <%= @user.profile.description %>
+                      </p>
+                      <% if @user.profile.avatar.attached? %>
+                        <img class="profile-picture" src=<%= (url_for(@user.profile.avatar)) %> alt="profile pic">
+                      <% else %>
+                        <img class="profile-picture" src="https://www.eyedocs.co.uk/components/com_community/assets/user-anon.png" alt="profile pic">
+                      <% end %>
+                  </div>
+                <i class="fas fa-pen"></i>
+                <%= link_to 'Edit my User Info', edit_user_path(@user) %> |
+                <%= link_to 'Edit my Profile Info', edit_user_profile_path(@user.id, @user.profile) %> |
+                <%= link_to 'Back', root_path %>
+              <% else %>
+                <p>
+                  <strong>Let's set up your profile!</strong>
+                  <%= link_to 'Create my Profile!', new_user_profile_path(@user) %>
+                </p>
+              <% end %>
+          </div>
+      </div>
+  </main>
+</body>

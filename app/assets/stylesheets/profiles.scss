@@ -19,6 +19,11 @@
     width: 130px;
     height: 130px;
 }
+.profile-picture-large {
+    display: inline-block;
+    width: 260px;
+    height: 260px;
+}
 .profile-area-container {
     display: flex;
     flex-direction: column;
@@ -116,4 +121,9 @@
     width: 100%;
     margin: auto;
    
+}
+.profile-edit-details {
+    position: absolute;
+    top: 0;
+    right: 0;
 }

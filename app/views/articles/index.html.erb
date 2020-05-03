@@ -18,10 +18,18 @@
                         <% end %>
                     <% end %>
                     <% if current_user %>
-                        <span class="logout-info">
-                            logged in as <%= current_user.name %>
-                            <%= link_to "Log Out", logout_path %>
-                        </span>
+                        <div class="logout-info">
+                            <span id="logout">
+                                logged in as <%= current_user.name %>
+                                <%= link_to "Log Out", logout_path %>
+                            </span>
+                            <% if current_user.admin? %>
+                                <span id="admin-abuse-reports">
+                                    <i class="fas fa-inbox"></i>
+                                    <%= link_to "Check Abuse Reports", article_abuse_reports_path(Article.all) %>
+                                </span>
+                            <% end %>
+                        </div>
                     <% else %>
                         <span class="login-info">
                             <%= link_to "Sign Up", signup_path %> or
@@ -33,18 +41,20 @@
                         <li><%= link_to'Feed', subscriptions_path, :style=>'font-family: "Times New Roman"; color: white'%></li>
                         <li><%= link_to'Article List', articles_path, :style=>'font-family: "Times New Roman"; color: white'%></li>
                         <% if current_user.present? %>
-                            <li><%= link_to'Settings', user_path(current_user), :style=>'font-family: "Times New Roman"; color: white'%></li>
+                            <li><%= link_to'Profile', user_profile_path(current_user, current_user.profile), :style=>'font-family: "Times New Roman"; color: white'%></li>
                         <% end %>
                     </ul>
                 </header>
                 <div class="article-preview-body-container">
                     <div class="article-preview-container">
                         <div class="articles-list">
-                            <div class="article-list-post-new">
-                                <h2>Create a new article!</h2>
-                                <%= button_to 'Create an Article', new_article_path, :method => 'get', :class => 'article-new-button', :style => 'border: 1px solid black; background: linear-gradient(#1E90FF, #00BFFF); color: white; font-weight: bolder' %>
-                            </div>
-                            <% @articles.each do |article| %>
+                            <% if current_user.present? %>
+                                <div class="article-list-post-new">
+                                    <h2>Create a new article!</h2>
+                                    <%= button_to 'Create an Article', new_article_path, :method => 'get', :class => 'article-new-button', :style => 'border: 1px solid black; background: linear-gradient(#1E90FF, #00BFFF); color: white; font-weight: bolder' %>
+                                </div>
+                            <% end %>>
+                            <% @articles.order(created_at: :desc).limit(20).each do |article| %>
                               <div class="article-list-post">
                                   <div class="article-preview-author-container">
                                       <% if article.user %>
@@ -64,7 +74,7 @@
                                   <div class="article-preview-options">
                                       <%= button_to 'Show More', article_path(article), :method => 'get', :class => 'article-options-button', :style => 'color: blue; height: 30px; padding: 0px; border: 1px solid black; background: linear-gradient(#86E845, #6CBC6D); color: white; font-weight: bolder' %>
                                       <% if article.user == current_user %>
-                                          <%= button_to 'Edit', new_article_path, :method => 'get', :class => 'article-options-button', :style => 'height: 30px; padding: 0px; border: 1px solid black; background: linear-gradient(#1E90FF, #00BFFF); color: white; font-weight: bolder' %>
+                                          <%= button_to 'Edit', edit_article_path(article), :method => 'get', :class => 'article-options-button', :style => 'height: 30px; padding: 0px; border: 1px solid black; background: linear-gradient(#1E90FF, #00BFFF); color: white; font-weight: bolder' %>
                                           <%= button_to 'Destroy', article_path(article), :method => 'delete', data: { confirm: 'Are you sure?' }, :class => 'article-options-button', :style => 'height: 30px; padding: 0px; border: 1px solid black; background: linear-gradient(#B7140F, #DA4F4F); color: white; font-weight: bolder' %>
                                       <% end %>
                                   </div>

@@ -27,3 +27,18 @@
 #report-options {
     margin-top: 60px;
 }
+#report-index-body {
+    width: 80%;
+    margin: auto;
+    border: 2px solid black;
+    background-color: white;
+    text-align: center;
+}
+#report-index-body table {
+    width: 60%;
+    margin: auto;
+}
+#report-index-body td {
+    padding: 10px;
+    border-bottom: 1px solid black;
+}

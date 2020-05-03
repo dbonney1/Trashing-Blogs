@@ -5,7 +5,6 @@
     <main class="main_index">
         
         <div class="body-container">
-            <div class="column"></div>
             <div class="body-main">
                 <header>
                     <h1 id="welcome">Welcome to TrashingBlogs</h1>
@@ -18,11 +17,19 @@
                             <% end %>
                         <% end %>
                     <% end %>
-                    <% if current_user %>
-                        <span class="logout-info">
-                            logged in as <%= current_user.name %>
-                            <%= link_to "Log Out", logout_path %>
-                        </span>
+                    <% if current_user.present? %>
+                        <div class="logout-info">
+                            <span id="logout">
+                                logged in as <%= current_user.name %>
+                                <%= link_to "Log Out", logout_path %>
+                            </span>
+                            <% if current_user.admin? %>
+                                <span id="admin-abuse-reports">
+                                    <i class="fas fa-inbox"></i>
+                                    <%= link_to "Check Abuse Reports", article_abuse_reports_path(Article.all) %>
+                                </span>
+                            <% end %>
+                        </div>
                     <% else %>
                         <span class="login-info">
                             <%= link_to "Sign Up", signup_path %> or
@@ -31,10 +38,10 @@
                     <% end %>
                     <ul id="navPane">
                         <li><%= link_to'Home', root_path, :style=>'font-family: "Times New Roman"; color: white'%></li>
-                        <li><%= link_to'Feed', articles_path, :style=>'font-family: "Times New Roman"; color: white'%></li>
+                        <li><%= link_to'Feed', subscriptions_path, :style=>'font-family: "Times New Roman"; color: white'%></li>
                         <li><%= link_to'Article List', articles_path, :style=>'font-family: "Times New Roman"; color: white'%></li>
                         <% if current_user.present? %>
-                            <li><%= link_to'Settings', user_path(current_user), :style=>'font-family: "Times New Roman"; color: white'%></li>
+                            <li><%= link_to'Profile', user_profile_path(current_user, current_user.profile), :style=>'font-family: "Times New Roman"; color: white'%></li>
                         <% end %>
                     </ul>
                 </header>
@@ -71,6 +78,7 @@
                             </p>
                         </div>
                         <div class="article-button-container">
+                            <% if current_user.present? %>
                                 <%= render '/subscriptions_helpers/subscribe_button', :user => @article.user, :current_user => current_user %>
                                 <%= button_to 'Report Abuse', new_article_abuse_report_path(@article), :method => 'get', class: 'article-options-button', :style => 'color: blue; height: 30px; padding: 0px; border: 1px solid black; background: linear-gradient(#86E845, #6CBC6D); color: white; font-weight: bolder' %>
                                 <% @like = @article.likes.find_by_user_id(current_user.id) %>
@@ -78,10 +86,19 @@
                                     <%= button_to 'Unlike!', article_like_path(@article, @like.id), :method => 'delete', class: 'article-options-button', :style => 'color: blue; height: 30px; padding: 0px; border: 1px solid black; background: linear-gradient(#86E845, #6CBC6D); color: white; font-weight: bolder'%>
                                 <% else %>
                                     <%= button_to 'Like!', article_likes_path(@article), :method => 'post', class: 'article-options-button', :style => 'color: blue; height: 30px; padding: 0px; border: 1px solid black; background: linear-gradient(#86E845, #6CBC6D); color: white; font-weight: bolder' %>
+                                <% end %>  
+                            <% end %>
+                        </div>
+                        <div class="article-options-button-container">
+                                <% if current_user.present? && (@article.user == current_user || current_user.admin?) %>
+                                    <% if @article.user == current_user %>
+                                        <%= button_to 'Edit', edit_article_path(@article), :method => 'get', :class => 'article-options-button', :style => 'height: 30px; padding: 0px; border: 1px solid black; background: linear-gradient(#1E90FF, #00BFFF); color: white; font-weight: bolder' %>
+                                    <% end %>
+                                    <%= button_to 'Destroy', article_path(@article), :method => 'delete', data: { confirm: 'Are you sure?' }, :class => 'article-options-button', :style => 'height: 30px; padding: 0px; border: 1px solid black; background: linear-gradient(#B7140F, #DA4F4F); color: white; font-weight: bolder' %>
                                 <% end %>
                                 
                         </div>
-                        <span>This post has received <%= @article.likes.count %> Likes!</span>
+                        <span><%= pluralize @article.likes.count, 'like' %></span>
                     </div>
                 </div>
                 <div class="article-comments-section">

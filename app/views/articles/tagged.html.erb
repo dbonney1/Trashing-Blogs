@@ -3,44 +3,90 @@
 </head>
 <body>
     <main class="main_index">
-        <header>
-            <h1 id="welcome">Similar Articles</h1>
-            <ul id="navPane">
-                <li><%= link_to'Home', root_path, :style=>'font-family: impact; color: black'%></li>
-                <li><%= link_to'Feed', articles_path, :style=>'font-family: impact; color: black'%></li>
-                <li><%= link_to'Article List', articles_path, :style=>'font-family: impact; color: black'%></li>
-                <% if current_user.present? %>
-                    <li><%= link_to'Settings', user_path(current_user), :style=>'font-family: impact; color: black'%></li>
-                <% end %>
-            </ul>
-        </header>
-        <div id="articles list">
-            <table>
-              <tr>
-                <th>Title</th>
-                <th>Text</th>
-                <th>Author</th>
-                <th>Tag</th>
-              </tr>
-             
-              <% @articles.each do |article| %>
-                <tr>
-                  <td><%= article.title %></td>
-                  <td><%= article.text %></td>
-                  <td>
-                    <% if article.user %>
-                      <%= article.user.name %>
+        
+        <div class="body-container">
+            <div class="body-main">
+                <header>
+                    <h1 id="welcome">Welcome to TrashingBlogs</h1>
+                    <% if current_user.present? && current_user.profile.present? %>
+                        <%= link_to user_profile_path(current_user, current_user.profile) do %>
+                            <% if current_user.profile.avatar.attached? %>
+                                <%= image_tag current_user.profile.avatar, :class => "profile-picture-logo" %>
+                            <% else %>
+                                <%= image_tag("https://www.eyedocs.co.uk/components/com_community/assets/user-anon.png", :class => "profile-picture-logo") %>
+                            <% end %>
+                        <% end %>
                     <% end %>
-                  </td>
-                  <td><% article.tag_list.each do |tag| %>
-                        <%= link_to tag, tagged_path(tag: tag) %>
-                      <% end %></td>
-                  <td><%= link_to 'Show', article_path(article) %></td>
-                  <td><%= link_to 'Edit', edit_article_path(article) %></td>
-                  <td><%= link_to 'Destroy', article_path(article), method: :delete, data: { confirm: 'Are you sure?' } %></td>
-                </tr>
-              <% end %>
-            </table>
+                    <% if current_user %>
+                        <div class="logout-info">
+                            <span id="logout">
+                                logged in as <%= current_user.name %>
+                                <%= link_to "Log Out", logout_path %>
+                            </span>
+                            <% if current_user.admin? %>
+                                <span id="admin-abuse-reports">
+                                    <i class="fas fa-inbox"></i>
+                                    <%= link_to "Check Abuse Reports", article_abuse_reports_path(Article.all) %>
+                                </span>
+                            <% end %>
+                        </div>
+                    <% else %>
+                        <span class="login-info">
+                            <%= link_to "Sign Up", signup_path %> or
+                            <%= link_to "Log In", login_path %>
+                        </span>
+                    <% end %>
+                    <ul id="navPane">
+                        <li><%= link_to'Home', root_path, :style=>'font-family: "Times New Roman"; color: white'%></li>
+                        <li><%= link_to'Feed', subscriptions_path, :style=>'font-family: "Times New Roman"; color: white'%></li>
+                        <li><%= link_to'Article List', articles_path, :style=>'font-family: "Times New Roman"; color: white'%></li>
+                        <% if current_user.present? %>
+                            <li><%= link_to'Profile', user_profile_path(current_user, current_user.profile), :style=>'font-family: "Times New Roman"; color: white'%></li>
+                        <% end %>
+                    </ul>
+                </header>
+                <div class="article-preview-body-container">
+                    <div class="article-preview-container">
+                        <div class="articles-list">
+                            <div class="article-list-post-new">
+                                <h2>Create a new article!</h2>
+                                <%= button_to 'Create an Article', new_article_path, :method => 'get', :class => 'article-new-button', :style => 'border: 1px solid black; background: linear-gradient(#1E90FF, #00BFFF); color: white; font-weight: bolder' %>
+                            </div>
+                            <% @articles.each do |article| %>
+                              <div class="article-list-post">
+                                  <div class="article-preview-author-container">
+                                      <% if article.user %>
+                                          <div class="article-preview-author"><%= article.user.name %></div>
+                                      <% else %>
+                                          <div class="article-preview-author">Anonymous</div>
+                                      <% end %>
+                                      <% if article.user && article.user.profile.avatar.attached? %>
+                                          <%= image_tag article.user.profile.avatar, :class => "profile-picture-embed" %>
+                                      <% else %>
+                                          <%= image_tag("https://www.eyedocs.co.uk/components/com_community/assets/user-anon.png", :class => "profile-picture-embed") %>
+                                      <% end %>
+                                  </div>
+                                  
+                                  <div class="article-preview-title"><%= article.title %></div>
+                                  <div class="article-preview-text"><%= article.text[0..20] %>...</div>
+                                  <div class="article-preview-options">
+                                      <%= button_to 'Show More', article_path(article), :method => 'get', :class => 'article-options-button', :style => 'color: blue; height: 30px; padding: 0px; border: 1px solid black; background: linear-gradient(#86E845, #6CBC6D); color: white; font-weight: bolder' %>
+                                      <% if article.user == current_user %>
+                                          <%= button_to 'Edit', edit_article_path(article), :method => 'get', :class => 'article-options-button', :style => 'height: 30px; padding: 0px; border: 1px solid black; background: linear-gradient(#1E90FF, #00BFFF); color: white; font-weight: bolder' %>
+                                          <%= button_to 'Destroy', article_path(article), :method => 'delete', data: { confirm: 'Are you sure?' }, :class => 'article-options-button', :style => 'height: 30px; padding: 0px; border: 1px solid black; background: linear-gradient(#B7140F, #DA4F4F); color: white; font-weight: bolder' %>
+                                      <% end %>
+                                  </div>
+                                  <div class="article-preview-tags">Tags:<% article.tag_list.each do |tag| %>
+                                      <%= link_to tag, tagged_path(tag: tag) %>
+                                  <% end %>
+                                  </div>
+                              </div>
+                            <% end %>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </main>
 </body>
+

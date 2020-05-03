@@ -5,7 +5,7 @@ class AbuseReportsController < ApplicationController
         redirect_to article_path(@article)
     end
     def index
-        @abuse_reports = AbuseReport.where(article_id: Article.find(params[:article_id]).id)
+        @abuse_reports = AbuseReport.all
     end
     def show
         @abuse_report = AbuseReport.find(params[:id])

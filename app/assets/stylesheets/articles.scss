@@ -76,6 +76,14 @@ input[type=button], input[type=submit] {
     flex-direction: row;
     margin-top: 20px;
 }
+.article-options-button-container {
+    position: absolute;
+    top: 0;
+    right: 0;
+    display: flex;
+    flex-direction: row;
+    margin-bottom: 20px;
+}
 .article-button {
     
     border: 2px solid black;
