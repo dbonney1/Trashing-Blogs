@@ -79,14 +79,29 @@ header {
 }
 #home-main-right {
     display: inline-block;
-    width: 100%;
+    width: 60%;
+    min-width: 200px;
     height: 350px;
+    padding-top: 50px;
     float: right;
     border: 1px solid black;
+    border-radius: 5px;
+    background: linear-gradient(white, silver);
+    overflow-x: hidden;
+    overflow-y: auto;
 }
-#home-main-right > h1 {
+#home-main-right h1 {
     font-family: Calibri;
     text-align: center;
+}
+#home-main-right h2 {
+    font-family: "Times New Roman";
+    font-size: 12pt;
+    text-align: center;
+}
+#home-newest-users {
+    width: 70%;
+    margin: auto;
 }
 .profile-container {
     display: inline-block;
