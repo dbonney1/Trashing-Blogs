@@ -45,10 +45,10 @@ ActiveRecord::Schema.define(version: 2020_05_03_171332) do
   create_table "articles", force: :cascade do |t|
     t.string "title"
     t.text "text"
+    t.string "tag"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "user_id"
-    t.string "tag"
     t.index ["user_id"], name: "index_articles_on_user_id"
   end
 

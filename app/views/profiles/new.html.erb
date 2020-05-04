@@ -25,14 +25,15 @@
                                 <% end %>
                             </div>
                         <% else %>
-                        <ul id="navPane">
-                            <li><%= link_to'Home', root_path, :style=>'font-family: "Times New Roman"; color: white'%></li>
-                            <li><%= link_to'Feed', articles_path, :style=>'font-family: "Times New Roman"; color: white'%></li>
-                            <li><%= link_to'Article List', articles_path, :style=>'font-family: "Times New Roman"; color: white'%></li>
-                            <% if current_user.present? %>
-                            <li><%= link_to'Profile', user_profile_path(current_user, current_user.profile), :style=>'font-family: "Times New Roman"; color: white'%></li>
+                            <ul id="navPane">
+                                <li><%= link_to'Home', root_path, :style=>'font-family: "Times New Roman"; color: white'%></li>
+                                <li><%= link_to'Feed', articles_path, :style=>'font-family: "Times New Roman"; color: white'%></li>
+                                <li><%= link_to'Article List', articles_path, :style=>'font-family: "Times New Roman"; color: white'%></li>
+                                <% if current_user.present? %>
+                                <li><%= link_to'Profile', user_profile_path(current_user, current_user.profile), :style=>'font-family: "Times New Roman"; color: white'%></li>
+                                <% end %>
+                            </ul>
                         <% end %>
-                        </ul>
                     </header>
                     <div>
                         <h1>New Profile</h1>
