@@ -200,6 +200,15 @@ feature"Blogger article related tests" do
         create_article("New Capybara Article", "This is a new Capybara article", "testtag")
         
         click_link "Log Out"
+        
+        sign_in("Test2", "test3@gmail.com")
+        
+        click_link "Article List"
+        click_button "Create an Article"
+        
+        create_article("Tests", "Some contet", "test")
+        
+        click_link "Log Out"
         sign_in("Test", "test@gmail.com")
         click_link "Article List"
         first(:button, "Show More").click
@@ -207,7 +216,8 @@ feature"Blogger article related tests" do
         expect(page).to have_content("1 like")
         click_button "Subscribe"
         click_link "Feed"
-        expect(page).to have_content("Test1")
-        expect(page).to have_content("New Capybara Article")
+        expect(page).to have_content("Test2")
+        expect(page).to have_content("Tests")
+        expect(page).to have_no_content("Test1")
     end
 end
