@@ -25,15 +25,14 @@ feature"Blogger article related tests" do
         expect(page).to have_content("Welcome to TrashingBlogs")
     end
     
-    def sign_in
-        create_user("Anon123", "test@gmail.com")
+    def sign_in(name, email)
+        create_user(name, email)
         
         click_link "Log In"
         expect(page).to have_content("Login")
-        fill_in "Email", with: "test@gmail.com"
+        fill_in "Email", with: email
         fill_in "Password", with: "test123"
         click_button "Login"
-        expect(page).to have_content("logged in as Anon123")
     end
     
     def create_article(title, text, tag)
@@ -47,7 +46,7 @@ feature"Blogger article related tests" do
     end
     
     scenario "Blogger successfully signs in and creates a new article" do
-        sign_in
+        sign_in("Anon123", "test@gmail.com")
         
         click_link "Article List"
         click_button "Create an Article"
@@ -56,7 +55,7 @@ feature"Blogger article related tests" do
     end
     
     scenario "Blogger successfully signs in and creates a new article, edit it and delete it" do
-        sign_in
+        sign_in("Anon123", "test@gmail.com")
         
         click_link "Article List"
         click_button "Create an Article"
@@ -66,6 +65,7 @@ feature"Blogger article related tests" do
         click_link "Article List"
         expect(page).to have_content("Tests")
         expect(page).to have_content("Tests content")
+        click_button "Show More"
         click_button "Edit"
         fill_in "Title", with: "Edited: Tests"
         fill_in "Text", with: "New Edit: Tests content"
@@ -75,13 +75,14 @@ feature"Blogger article related tests" do
         click_link "Article List"
         expect(page).to have_content("Edited: Tests")
         expect(page).to have_content("New Edit: Tests ")
+        click_button "Show More"
         click_button "Destroy"
         expect(page).to have_no_content("Edited: Tests")
         expect(page).to have_no_content("New Edit: Tests content")
     end
     
     scenario "Blogger successfully signs in and creates a new article and add a comment to it" do
-        sign_in
+        sign_in("Anon123", "test@gmail.com")
         
         click_link "Article List"
         click_button "Create an Article"
@@ -102,7 +103,7 @@ feature"Blogger article related tests" do
     end
     
     scenario "Blogger add a report about an article and inspects it" do
-        sign_in
+        sign_in("Anon123", "test@gmail.com")
         
         click_link "Article List"
         click_button "Create an Article"
@@ -130,7 +131,7 @@ feature"Blogger article related tests" do
     end
     
     scenario "Blogger create articles, check out the tags for them and find similar articles" do
-        sign_in
+        sign_in("Anon123", "test@gmail.com")
         
         click_link "Article List"
         click_button "Create an Article"
@@ -173,7 +174,7 @@ feature"Blogger article related tests" do
     scenario "Blogger sign in and wants to edit profile" do
         visit root_path
         expect(page).to have_no_content("Profile")
-        sign_in
+        sign_in("Anon123", "test@gmail.com")
         expect(page).to have_content("Profile")
         click_link "Profile"
         click_link "Edit my User Info"
@@ -188,5 +189,25 @@ feature"Blogger article related tests" do
         click_button "Update Profile"
         expect(page).to have_content("User Profile")
         expect(page).to have_content("something")
+    end
+    
+    scenario "Blogger sees another blogger, subscribe and give a like" do
+        sign_in("Test1", "test2@gmail.com")
+        
+        click_link "Article List"
+        click_button "Create an Article"
+        
+        create_article("New Capybara Article", "This is a new Capybara article", "testtag")
+        
+        click_link "Log Out"
+        sign_in("Test", "test@gmail.com")
+        click_link "Article List"
+        first(:button, "Show More").click
+        click_button "Like!"
+        expect(page).to have_content("1 like")
+        click_button "Subscribe"
+        click_link "Feed"
+        expect(page).to have_content("Test1")
+        expect(page).to have_content("New Capybara Article")
     end
 end
