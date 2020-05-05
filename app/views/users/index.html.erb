@@ -1,30 +1,79 @@
-<h1>Users</h1>
-
-<table>
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th>Email</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @users.each do |user| %>
-      <tr>
-        <td><%= user.name %></td>
-        <td><%= user.email %></td>
-        <td><%= link_to 'Show', user %></td>
-        <td><%= link_to 'Edit', edit_user_path(user) %></td>
-        <% if user.id != current_user.id %>
-          <td><%= link_to 'Destroy', user, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-        <% end %>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
-
-<br>
-
-<%= link_to 'New User', new_user_path %>
-<%= link_to 'Back', root_path %>
+<head>
+    <title>Trashing Blogs</title>
+</head>
+<body>
+    <main class="main_index">
+        
+        <div class="body-container">
+            <div class="body-main">
+                <header>
+                    <h1 id="welcome">Welcome to TrashingBlogs</h1>
+                    <% if current_user.present? && current_user.profile.present? %>
+                        <%= link_to user_profile_path(current_user, current_user.profile) do %>
+                            <% if current_user.profile.avatar.attached? %>
+                                <%= image_tag current_user.profile.avatar, :class => "profile-picture-logo" %>
+                            <% else %>
+                                <%= image_tag("https://www.eyedocs.co.uk/components/com_community/assets/user-anon.png", :class => "profile-picture-logo") %>
+                            <% end %>
+                        <% end %>
+                    <% end %>
+                    <% if current_user %>
+                        <div class="logout-info">
+                            <span id="logout">
+                                logged in as <%= current_user.name %>
+                                <%= link_to "Log Out", logout_path %>
+                            </span>
+                            <% if current_user.admin? %>
+                                <span id="admin-abuse-reports">
+                                    <i class="fas fa-inbox"></i>
+                                    <%= link_to "Check Abuse Reports", article_abuse_reports_path(Article.all) %>
+                                </span>
+                            <% end %>
+                        </div>
+                    <% else %>
+                        <span class="login-info">
+                            <%= link_to "Sign Up", signup_path %> or
+                            <%= link_to "Log In", login_path %>
+                        </span>
+                    <% end %>
+                    <ul id="navPane">
+                        <li><%= link_to'Home', root_path, :style=>'font-family: "Times New Roman"; color: white'%></li>
+                        <li><%= link_to'Feed', subscriptions_path, :style=>'font-family: "Times New Roman"; color: white'%></li>
+                        <li><%= link_to'Article List', articles_path, :style=>'font-family: "Times New Roman"; color: white'%></li>
+                        <% if current_user.present? %>
+                            <li><%= link_to'Profile', user_profile_path(current_user, current_user.profile), :style=>'font-family: "Times New Roman"; color: white'%></li>
+                        <% end %>
+                    </ul>
+                </header>
+                <h1>Users</h1>
+                
+                <table>
+                  <thead>
+                    <tr>
+                      <th>Name</th>
+                      <th>Email</th>
+                      <th colspan="3"></th>
+                    </tr>
+                  </thead>
+                
+                  <tbody>
+                    <% AbuseReport.all.each do |report| %>
+                      <tr>
+                        <td><%= User.find_by(id: report.article.user_id).name %></td>
+                        <td><%= User.find_by(id: report.article.user_id).email %></td>
+                        <td><%= link_to 'Show', user_profile_path(User.find_by(id: report.article.user_id), User.find_by(id: report.article.user_id).profile) %></td>
+                        <% if User.find_by(id: report.article.user_id).id != current_user.id %>
+                          <td><%= link_to 'Destroy', User.find_by(id: report.article.user_id), method: :delete, data: { confirm: 'Are you sure?' } %></td>
+                        <% end %>
+                      </tr>
+                    <% end %>
+                  </tbody>
+                </table>
+                
+                <br>
+                
+                <%= link_to 'Back', article_abuse_reports_path(Article.all) %>
+            </div>
+        </div>
+    </main>
+</body>

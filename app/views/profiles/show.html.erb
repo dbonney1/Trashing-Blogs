@@ -24,7 +24,10 @@
                                 <%= link_to "Log Out", logout_path %>
                             </span>
                             <% if current_user.admin? %>
-                                <span id="admin-abuse-reports"><i class="fas fa-inbox"></i>Check Abuse Reports</span>
+                                <span id="admin-abuse-reports">
+                                    <i class="fas fa-inbox"></i>
+                                    <%= link_to "Check Abuse Reports", article_abuse_reports_path(Article.all) %>
+                                </span>
                             <% end %>
                         </div>
                     <% else %>

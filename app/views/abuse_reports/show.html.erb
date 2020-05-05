@@ -71,6 +71,7 @@
                         <h1>What action would you like to take?</h1>
                         <%= link_to 'Destroy Report', [@abuse_report.article, @abuse_report], method: :delete, data: { confirm: 'Are you sure?' } %>
                         <%= link_to 'Inspect Article', article_path(@abuse_report.article) %>
+                        <%= link_to "List of Reported Users", users_path %>
                     </div>
                 </div>
             </div>
