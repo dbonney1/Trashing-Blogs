@@ -73,10 +73,6 @@
                                   <div class="article-preview-text"><%= article.text[0..20] %>...</div>
                                   <div class="article-preview-options">
                                       <%= button_to 'Show More', article_path(article), :method => 'get', :class => 'article-options-button', :style => 'color: blue; height: 30px; padding: 0px; border: 1px solid black; background: linear-gradient(#86E845, #6CBC6D); color: white; font-weight: bolder' %>
-                                      <% if article.user == current_user %>
-                                          <%= button_to 'Edit', edit_article_path(article), :method => 'get', :class => 'article-options-button', :style => 'height: 30px; padding: 0px; border: 1px solid black; background: linear-gradient(#1E90FF, #00BFFF); color: white; font-weight: bolder' %>
-                                          <%= button_to 'Destroy', article_path(article), :method => 'delete', data: { confirm: 'Are you sure?' }, :class => 'article-options-button', :style => 'height: 30px; padding: 0px; border: 1px solid black; background: linear-gradient(#B7140F, #DA4F4F); color: white; font-weight: bolder' %>
-                                      <% end %>
                                   </div>
                                   <div class="article-preview-tags">Tags:<% article.tag_list.each do |tag| %>
                                       <%= link_to tag, tagged_path(tag: tag) %>
