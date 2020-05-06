@@ -45,25 +45,31 @@
                         <% end %>
                     </ul>
                 </header>
-                <h1>Users</h1>
+                <h1>Reported Users</h1>
                 
                 <table>
                   <thead>
                     <tr>
                       <th>Name</th>
                       <th>Email</th>
-                      <th colspan="3"></th>
+                      <th># Active Reports</th>
+                      <th colspan="4"></th>
                     </tr>
                   </thead>
                 
                   <tbody>
+                      <% reported_users = Hash.new(0) %>
                     <% AbuseReport.all.each do |report| %>
+                        <% reported_users[User.find_by(id: report.article.user_id).name] += 1 %>
+                    <% end %>
+                    <% reported_users.each do |key, value| %>
                       <tr>
-                        <td><%= User.find_by(id: report.article.user_id).name %></td>
-                        <td><%= User.find_by(id: report.article.user_id).email %></td>
-                        <td><%= link_to 'Show', user_profile_path(User.find_by(id: report.article.user_id), User.find_by(id: report.article.user_id).profile) %></td>
-                        <% if User.find_by(id: report.article.user_id).id != current_user.id %>
-                          <td><%= link_to 'Destroy', User.find_by(id: report.article.user_id), method: :delete, data: { confirm: 'Are you sure?' } %></td>
+                        <td><%= User.find_by(name: key).name %></td>
+                        <td><%= User.find_by(name: key).email %></td>
+                        <td id="user-active-reports"><%= reported_users[key] %></td>
+                        <td><%= link_to 'Show', user_profile_path(User.find_by(name: key), User.find_by(name: key).profile) %></td>
+                        <% if User.find_by(name: key).id != current_user.id %>
+                          <td><%= link_to 'Destroy', User.find_by(name: key), method: :delete, data: { confirm: 'Are you sure?' } %></td>
                         <% end %>
                       </tr>
                     <% end %>

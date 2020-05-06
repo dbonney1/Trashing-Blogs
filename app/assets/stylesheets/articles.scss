@@ -109,6 +109,11 @@ input[type=button], input[type=submit] {
     display: flex;
     flex-direction: row;
 }
+#article-timestamp {
+    display: inline-block;
+    margin: 0;
+    padding: 0;
+}
 
 .article-list-post {
     position: relative;
@@ -159,18 +164,21 @@ input[type=button], input[type=submit] {
 }
 
 .article-preview-title {
+    font-size: 13pt;
     position: relative;
-    top: 50px;
+    top: 32px;
     flex: 0 1 25%;
     margin-right: 5vw;
 }
 .article-preview-text {
+    font-size: 13pt;
     position: relative;
     top: 50px;
     flex: 0 1 25%;
     margin-right: 5vw;
 }
 .article-preview-tags {
+    font-size: 13pt;
     position: relative;
     top: 50px;
     flex: 0 1 25%;

@@ -86,9 +86,8 @@
                                                 <%= image_tag("https://www.eyedocs.co.uk/components/com_community/assets/user-anon.png", :class => "profile-picture-embed") %>
                                             <% end %>
                                       </div>
-                                      
-                                      <div class="article-preview-title"><%= article.title %></div>
-                                      <div class="article-preview-text"><%= article.text[0..20] %>...</div>
+                                      <div id="article-timestamp"><%=article.created_at.strftime("%B %d %Y")%><div class="article-preview-title"><%= article.title %></div></div>
+                                      <div class="article-preview-text"><%= article.text[0..25] %>...</div>
                                       <div class="article-preview-options">
                                           <%= button_to 'Show More', article_path(article), :method => 'get', :class => 'article-options-button', :style => 'color: blue; height: 30px; padding: 0px; border: 1px solid black; background: linear-gradient(#86E845, #6CBC6D); color: white; font-weight: bolder' %>
                                       </div>
